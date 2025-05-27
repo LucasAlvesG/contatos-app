@@ -212,19 +212,22 @@ public class AgendaTelefonica {
             // e.printStackTrace();
         }
     }
-    public void limparTodosContatos() {
-        String sql = "DELETE FROM contatos"; // Comando SQL para deletar todas as linhas da tabela 'contatos'
+    public void limparTodosContatos() { // Nome do método atualizado para clareza
+        String sql = "TRUNCATE TABLE contatos"; // Comando SQL alterado
 
         try (Connection conn = Conexao.getConnection();
-             Statement stmt = conn.createStatement()) { // Usando Statement, pois não há parâmetros
+             Statement stmt = conn.createStatement()) {
 
-            int linhasAfetadas = stmt.executeUpdate(sql);
-            System.out.println(linhasAfetadas + " contato(s) removido(s) da tabela. A agenda foi limpa.");
+            // TRUNCATE TABLE não retorna o número de linhas afetadas da mesma forma que DELETE.
+            // Em alguns drivers/bancos, executeUpdate() pode retornar 0 para TRUNCATE.
+            // O importante é que a operação seja executada.
+            stmt.executeUpdate(sql);
+            System.out.println("Tabela 'contatos' truncada. Todos os contatos foram removidos e o contador de ID foi resetado.");
 
         } catch (SQLException e) {
-            System.out.println("Erro ao tentar limpar todos os contatos do banco de dados: " + e.getMessage());
+            System.out.println("Erro ao tentar truncar a tabela 'contatos': " + e.getMessage());
             // e.printStackTrace(); // Descomente para debug, se necessário
         }
     }
-    
+
 }
