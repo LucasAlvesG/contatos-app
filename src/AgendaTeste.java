@@ -14,9 +14,5 @@ public class AgendaTeste {
         agenda.buscarContato("Charlie");
         agenda.listarContatos();
 
-
-        
-
-
     }
 }
