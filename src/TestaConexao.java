@@ -5,10 +5,10 @@ public class TestaConexao {
     public static void main(String[] args) {
         try {
             Connection conn = Conexao.getConnection();
-            System.out.println("✅ Conexão bem-sucedida!");
+            System.out.println("deu bom");
             conn.close();
         } catch (SQLException e) {
-            System.out.println("❌ Erro na conexão: " + e.getMessage());
+            System.out.println("não foi " + e.getMessage());
         }
     }
 }
